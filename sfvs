@@ -1,0 +1,22 @@
+#!/bin/bash
+shopt -s expand_aliases
+alias fzf="fzf -m --reverse"
+
+[ $# -ne 1 ] && echo "Provide path to Video directory" && exit
+
+path="$(pwd)/$1"
+pick=$(ls $path | fzf)
+file=${path}/${pick}
+
+# The awk statement find a $file with list in the name
+# and prints videos.list to the list variable.
+list=$(ls $file | awk '/list/ {print "videos.list"}')
+if [ ${list} == "videos.list" ]
+then
+    vid=$(awk '{print}' $file | fzf)
+    vid=$(echo $vid | awk '{print $1}')
+else
+    vid=$file
+fi
+# -r checks if file is readable
+[ -r ${file} ] && mpv ${vid} || echo "Unable to play Video"
