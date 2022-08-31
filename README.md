@@ -1,5 +1,5 @@
 # SimpleFzfVideoSelector
-As the name says this is a simple video selector that uses fzf.
+As the name says this is a simple video selector that uses fzf. This script is pulled from and updated from my older project f_expl.
 # Dependencies
 fzf and mpv
 # videos.list file
